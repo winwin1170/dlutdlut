@@ -1,0 +1,102 @@
+
+<!-- saved from url=(0050)http://10.201.121.134:8080/linxinyue/linxinyue.jsp -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>三角形验证</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        input[type="number"], input[type="submit"], input[type="reset"] {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        input[type="submit"], input[type="reset"] {
+            width: auto;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover, input[type="reset"]:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+        function validateTriangleForm() {
+            // 获取用户输入的三条边
+            var a = parseFloat(document.forms["triangleForm"]["a"].value);
+            var b = parseFloat(document.forms["triangleForm"]["b"].value);
+            var c = parseFloat(document.forms["triangleForm"]["c"].value);
+            
+            // 清除之前的错误信息
+            document.getElementById("error-message").innerHTML = "";
+
+            // 检查用户输入是否为有效的数字
+            if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                document.getElementById("error-message").innerHTML = "请输入有效的数字！";
+                return false;
+            }
+
+            // 三角形条件验证
+            if (a <= 0 || b <= 0 || c <= 0) {
+                document.getElementById("error-message").innerHTML = "三条边的长度必须大于零！";
+                return false;
+            }
+
+            if (a + b > c && a + c > b && b + c > a) {
+                alert("可以组成三角形！");
+                return true;
+            } else {
+                document.getElementById("error-message").innerHTML = "无法组成三角形！";
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>三角形验证</h1>
+        
+        <form name="triangleForm" method="post" onsubmit="return validateTriangleForm()">
+            <div id="error-message" class="error"></div>
+
+            <label for="a">请输入第一条边的长度 (a):</label>
+            <input type="number" name="a" id="a" placeholder="请输入第一条边的长度" required=""><br>
+
+            <label for="b">请输入第二条边的长度 (b):</label>
+            <input type="number" name="b" id="b" placeholder="请输入第二条边的长度" required=""><br>
+
+            <label for="c">请输入第三条边的长度 (c):</label>
+            <input type="number" name="c" id="c" placeholder="请输入第三条边的长度" required=""><br><br>
+
+            <input type="submit" value="验证">
+            <input type="reset" value="重置"><br><br>
+        </form>
+    </div>
+
+
+</body></html>
